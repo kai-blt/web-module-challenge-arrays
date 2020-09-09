@@ -306,8 +306,39 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
 
-    /*code here*/
-
+let randomArray = [];    
+function getRandomFlavors(arr1, arr2, arr3, arr4){
+    while (randomArray.length < 31) {
+        let arrayChoice = Math.round(Math.random() * 3); //Choose a random array to select from
+        console.log('Choosing array: ' + arrayChoice);
+        switch (arrayChoice) {
+            case 0:
+                let arr1Choice = Math.ceil(Math.random() * arr1.length - 1); //Choose a random index from arr1 to select from
+                console.log('Arr1 length: ' + arr1.length + ' Arr1Choice: ' + arr1Choice);
+                console.log('Pushing item: ' + arr1[arr1Choice]);
+                randomArray.push(arr1[arr1Choice]);
+                break;
+            case 1:
+                let arr2Choice = Math.ceil(Math.random() * arr2.length - 1); //Choose a random index from arr2 to select from
+                console.log('Arr2length: ' + arr2.length + ' Arr2Choice: ' + arr2Choice);
+                console.log('Pushing item: ' + arr2[arr2Choice]);
+                randomArray.push(arr2[arr2Choice]);
+                break;
+            case 2:
+                let arr3Choice = Math.ceil(Math.random() * arr3.length - 1); //Choose a random index from arr3 to select from
+                console.log('Arr3 length: ' + arr1.length + ' Arr3Choice: ' + arr3Choice);
+                console.log('Pushing item: ' + arr3[arr3Choice]);
+                randomArray.push(arr3[arr3Choice]);
+                break;
+            case 3: 
+                let arr4Choice = Math.ceil(Math.random() * arr4.length - 1); //Choose a random index from arr4 to select from
+                console.log('Arr4 length: ' + arr4.length + ' Arr4Choice: ' + arr4Choice);
+                console.log('Pushing item: ' + arr4[arr4Choice]);
+                randomArray.push(arr4[arr4Choice]);
+                break;
+        }
+    }
+    return randomArray;
 }
+console.log(getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
