@@ -209,12 +209,20 @@ Your function should accept:
 and should return the average number of words per item in the array. 
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
+let arrCount = [];
+function getAverageWordLength(arr) {     
+    
+    /*For each item in the array, split the item into a separate array so we can count the amount of words. Use .length to count # words in this new array
+    Push the result into the array arrCount*/
+    arr.forEach(item => arrCount.push(item.split(' ').length)); 
 
-function getAverageWordLength(/*code here*/){
-
-    /*code here*/
-
+    //For each item in the arrCount sum up the values, divide by the length of the array to get the average. Round for a nice clean number.
+    let average = Math.round(arrCount.reduce((total, currValue) => total + currValue) / arr.length) // 
+    return average;
 }
+console.log(getAverageWordLength(originalFlavors));
+
+
 
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
