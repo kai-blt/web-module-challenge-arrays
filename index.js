@@ -178,7 +178,7 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 hint - you can use the .includes method to help you solve this */
 function filterByWord(arr, flavorToFind){
     let foundItems = [];
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) { 
         if (arr[i].includes(flavorToFind)){
             foundItems.push(arr[i]);
         }
@@ -186,6 +186,16 @@ function filterByWord(arr, flavorToFind){
     return foundItems;
 }
 console.log(filterByWord(originalFlavors, 'Chocolate'));
+
+//Could also use .forEach() Which is less code with arrow functions
+function filterByWord2(arr, flavorToFind){
+    let foundItems = [];
+    arr.forEach(item => item.includes(flavorToFind) ? foundItems.push(item) : 'No items found');
+    return foundItems;
+}
+console.log(filterByWord2(originalFlavors, 'Fudge'));
+
+
 
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
