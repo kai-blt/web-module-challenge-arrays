@@ -220,7 +220,7 @@ function getAverageWordLength(arr) {
     let average = Math.round(arrCount.reduce((total, currValue) => total + currValue) / arr.length) // 
     return average;
 }
-console.log(getAverageWordLength(originalFlavors));
+console.log('The average number of words in originalFlavors array is: ' + getAverageWordLength(originalFlavors));
 
 
 
