@@ -40,7 +40,7 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(arr){
+function is31Flavors(arr) {
     if (arr.length === 31) {
         return 'Is the array 31 items in length?: ' + true;
     } else {
@@ -63,7 +63,7 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(newFlavor, arr){
+function addFlavor(newFlavor, arr) {
     arr.unshift(newFlavor);
     return arr;
 }
@@ -83,7 +83,7 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(arr){
+function removeLastFlavor(arr) {
     arr.pop();
     return arr;
 }
@@ -101,7 +101,7 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(arr, index){
+function getFlavorByIndex(arr, index) {
     //Check if array index is out of bounds
     if (arr[index] === undefined) { 
         return 'Not a valid index'
@@ -111,6 +111,8 @@ function getFlavorByIndex(arr, index){
 }
 console.log('Example with invalid index: ' + getFlavorByIndex(originalFlavors, 33));
 console.log('Example with valid index: ' + getFlavorByIndex(originalFlavors, 30));
+
+
 
 
 
@@ -126,12 +128,16 @@ For example, removeFlavorByName(originalFlavors, "Vanilla") would return an arra
 Hint: You can use .splice() for this
 
 */
-
-function removeFlavorByName(/*code here*/){
-
-    /*code here*/
-
+function removeFlavorByName(remFlavor, arr) {
+    let index = arr.indexOf(remFlavor); //Find index
+    arr.splice(index, 1); //Remove item
+    return arr;
 }
+console.log(removeFlavorByName('Vanilla', originalFlavors));
+
+
+
+
 
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
