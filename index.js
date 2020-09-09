@@ -40,11 +40,17 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(/*code here*/){
-
-    /*code here*/
-
+function is31Flavors(arr) {
+    if (arr.length === 31) {
+        return 'Is the array 31 items in length?: ' + true;
+    } else {
+        return 'Is the array 31 items in length?: ' + false;
+    }
 }
+console.log(is31Flavors(originalFlavors));
+
+
+
 
 /* Task 2: Corporate has come to you with an idea for a new flavor: Rainbow Sherbert! They think this will be a game changer. You need to modify the array to include this flavor. 
 
@@ -57,11 +63,14 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(/*code here*/){
-
-    /*code here*/
-
+function addFlavor(newFlavor, arr) {
+    arr.unshift(newFlavor);
+    return arr;
 }
+console.log(addFlavor('Magnificent Mint', originalFlavors));
+
+
+
 
 
 /* Task 3: Houston, we have a problem! There are now 32 flavors in the array! Your task is to remove an item from the end of the array. 
@@ -74,11 +83,14 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(/*code here*/){
-
-    /*code here*/
-
+function removeLastFlavor(arr) {
+    arr.pop();
+    return arr;
 }
+console.log(removeLastFlavor(originalFlavors));
+
+
+
 
 /* Task 4: Write a function that returns a flavor at a given index in the array.
 
@@ -89,11 +101,20 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(/*code here*/){
-
-    /*code here*/
-
+function getFlavorByIndex(arr, index) {
+    //Check if array index is out of bounds
+    if (arr[index] === undefined) { 
+        return 'Not a valid index'
+   } else {
+       return arr[index];
+   }
 }
+console.log('Example with invalid index: ' + getFlavorByIndex(originalFlavors, 33));
+console.log('Example with valid index: ' + getFlavorByIndex(originalFlavors, 30));
+
+
+
+
 
 /* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from the array. 
 
@@ -107,12 +128,16 @@ For example, removeFlavorByName(originalFlavors, "Vanilla") would return an arra
 Hint: You can use .splice() for this
 
 */
-
-function removeFlavorByName(/*code here*/){
-
-    /*code here*/
-
+function removeFlavorByName(remFlavor, arr) {
+    let index = arr.indexOf(remFlavor); //Find index
+    arr.splice(index, 1); //Remove item
+    return arr;
 }
+console.log(removeFlavorByName('Vanilla', originalFlavors));
+
+
+
+
 
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
@@ -122,14 +147,22 @@ Your function should accept:
 2 arguments 1 for your new array and one for your original array
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
-
-function copy(/*code here*/){
-
-    /*code here*/
-
+const newArray = [];
+function copy(oldArr, newArr) {
+    newArr = [...oldArr]; //Can also use .slice(), spread ... is the new ES6 way. Only a shallow copy though, doesn't work for multi dimensional array.
+    return 'This is the old array:\n\n' + oldArr + '\n\nThis is the new array:\n\n' + newArr;
 }
+console.log(copy(originalFlavors, newArray));
 
-/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
+
+
+
+
+
+/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. 
+Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values.
+Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate".
+This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
 Your function should accept: 
 
@@ -143,12 +176,25 @@ For example, filterByWord(originalFlavors, "Chocolate") should return ["Chocolat
 DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
-
-function filterByWord(/*code here*/){
-
-    /*code here*/
-
+function filterByWord(arr, flavorToFind){
+    let foundItems = [];
+    for (let i = 0; i < arr.length; i++) { 
+        if (arr[i].includes(flavorToFind)){
+            foundItems.push(arr[i]);
+        }
+    }
+    return foundItems;
 }
+console.log(filterByWord(originalFlavors, 'Chocolate'));
+
+//Could also use .forEach() Which is less code with arrow functions
+function filterByWord2(arr, flavorToFind){
+    let foundItems = [];
+    arr.forEach(item => item.includes(flavorToFind) ? foundItems.push(item) : 'No items found');
+    return foundItems;
+}
+console.log(filterByWord2(originalFlavors, 'Fudge'));
+
 
 
 
@@ -163,12 +209,20 @@ Your function should accept:
 and should return the average number of words per item in the array. 
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
+let arrCount = [];
+function getAverageWordLength(arr) {     
+    
+    /*For each item in the array, split the item into a separate array so we can count the amount of words. Use .length to count # words in this new array
+    Push the result into the array arrCount*/
+    arr.forEach(item => arrCount.push(item.split(' ').length)); 
 
-function getAverageWordLength(/*code here*/){
-
-    /*code here*/
-
+    //For each item in the arrCount sum up the values, divide by the length of the array to get the average. Round for a nice clean number.
+    let average = Math.round(arrCount.reduce((total, currValue) => total + currValue) / arr.length) // 
+    return average;
 }
+console.log('The average number of words in originalFlavors array is: ' + getAverageWordLength(originalFlavors));
+
+
 
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
@@ -252,8 +306,39 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
 
-    /*code here*/
-
+let randomArray = [];    
+function getRandomFlavors(arr1, arr2, arr3, arr4){
+    while (randomArray.length < 31) {
+        let arrayChoice = Math.round(Math.random() * 3); //Choose a random array to select from
+        console.log('Choosing array: ' + arrayChoice);
+        switch (arrayChoice) {
+            case 0:
+                let arr1Choice = Math.ceil(Math.random() * arr1.length - 1); //Choose a random index from arr1 to select from
+                console.log('Arr1 length: ' + arr1.length + ' Arr1Choice: ' + arr1Choice);
+                console.log('Pushing item: ' + arr1[arr1Choice]);
+                randomArray.push(arr1[arr1Choice]);
+                break;
+            case 1:
+                let arr2Choice = Math.ceil(Math.random() * arr2.length - 1); //Choose a random index from arr2 to select from
+                console.log('Arr2length: ' + arr2.length + ' Arr2Choice: ' + arr2Choice);
+                console.log('Pushing item: ' + arr2[arr2Choice]);
+                randomArray.push(arr2[arr2Choice]);
+                break;
+            case 2:
+                let arr3Choice = Math.ceil(Math.random() * arr3.length - 1); //Choose a random index from arr3 to select from
+                console.log('Arr3 length: ' + arr1.length + ' Arr3Choice: ' + arr3Choice);
+                console.log('Pushing item: ' + arr3[arr3Choice]);
+                randomArray.push(arr3[arr3Choice]);
+                break;
+            case 3: 
+                let arr4Choice = Math.ceil(Math.random() * arr4.length - 1); //Choose a random index from arr4 to select from
+                console.log('Arr4 length: ' + arr4.length + ' Arr4Choice: ' + arr4Choice);
+                console.log('Pushing item: ' + arr4[arr4Choice]);
+                randomArray.push(arr4[arr4Choice]);
+                break;
+        }
+    }
+    return randomArray;
 }
+console.log(getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors));
